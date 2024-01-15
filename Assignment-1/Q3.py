@@ -1,29 +1,33 @@
-l = [10, 20, 30, 40, 50, 60, 70, 80]
-print(l)
+# Write a Python program to check the validity of password input by users.
+# Validation:
+# At least 1 letter between [a-z] and 1 letter between [A-Z].
+# At least 1 number between [0-9].
+# At least 1 character from [$#@].
+# Minimum length 6 characters.
+# Maximum length 16 characters.
 
-# (i)
-l.append(300)
-l.append(200)
-print(l)
-
-# (ii)
-l.remove(10)
-l.remove(30)
-print(l)
-
-# (iii)
-n = len(l)
-for i in range (0, n):
-    for j in range (i+1, n):
-        if l[i]>l[j]:
-            temp = l[i]
-            l[i] = l[j]
-            l[j] = temp
-print(l)
-for i in range (0, n):
-    for j in range (i+1, n):
-        if l[i]<l[j]:
-            temp = l[i]
-            l[i] = l[j]
-            l[j] = temp
-print(l)
+Pass = input('Enter the password : ')
+leng = len(Pass)
+def validation (Pass, length):
+    if length < 6 or length > 16:
+        return False
+    has_lowercase = False
+    has_uppercase = False
+    has_digit = False
+    has_special_char = False
+    for ch in Pass:
+        i = ord(ch)
+        if i in range (48,58):
+            has_digit = True;
+        elif i in range (65,91):
+            has_uppercase = True;
+        elif i in range (97,123):
+            has_lowercase = True;
+        elif ch in ['#', '$', '@']: 
+            has_special_char = True;
+        else:
+            return False
+    return has_digit and has_uppercase and has_lowercase and has_special_char
+    
+result = validation (Pass, leng)
+print(result)
